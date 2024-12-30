@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1001607237036",
+    "project_id": "lakshmi-setu",
+    "storage_bucket": "lakshmi-setu.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001607237036:android:7a77f5c832f651a1d87e09",
+        "android_client_info": {
+          "package_name": "com.example.lakshmi_setu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHEdzgRuVhh-3h9EI38fQJ4z2DKQ4KR6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
