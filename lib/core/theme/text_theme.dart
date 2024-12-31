@@ -20,8 +20,8 @@ class TextThemeLaxmiSetu {
     ),
     bodySmall: GoogleFonts.urbanist(
       fontSize: 14,
-      fontWeight: FontWeight.normal,
-      color: Colors.black,
+      fontWeight: FontWeight.w500,
+      color: Colors.black54,
     ),
     labelMedium: GoogleFonts.lexend(
       fontSize: 18,

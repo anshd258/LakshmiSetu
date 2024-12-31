@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lakshmi_setu/app_routes.dart';
+import 'package:lakshmi_setu/core/theme/apptheme.dart';
 import 'package:lakshmi_setu/presentation/provider/bloc/auth_provider_bloc.dart';
 
 ValueKey<int> providerScopeKey = ValueKey<int>(0);
@@ -25,7 +26,8 @@ class AppEntrypoint extends StatelessWidget {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.system,
-            theme: ThemeData(),
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
             routerConfig: routes,
           );
         },
