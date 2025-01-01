@@ -98,7 +98,7 @@ class _BudgetingScreenState extends State<BudgetingScreen> {
                       size: 30,
                     ),
                     onPressed: () {
-                      context.go(AddExpensePage.route);
+                      context.push(AddExpensePage.route);
                     },
                   ),
                 ],

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:lakshmi_setu/core/routes/home_routes.dart';
 import 'package:lakshmi_setu/core/routes/onboarding_routes.dart';
 import 'package:lakshmi_setu/presentation/screens/authentication/page.dart';
+import 'package:lakshmi_setu/presentation/screens/banking/page.dart';
 import 'package:lakshmi_setu/presentation/screens/home/page.dart';
 
 final rootNavigatoinKey = GlobalKey<NavigatorState>(debugLabel: "root");
@@ -25,7 +26,7 @@ void resetShellRouter(BuildContext context) {
 
 GoRouter routes = GoRouter(
   navigatorKey: rootNavigatoinKey,
-  initialLocation: AuthenticationScreen.route,
+  initialLocation: BankingOptionsScreen.route,
   routes: [
     ...onboardingRoutes,
     ...homeRoutes,

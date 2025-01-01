@@ -29,9 +29,9 @@ class TextThemeLaxmiSetu {
       color: Colors.black,
     ),
     labelSmall: GoogleFonts.lexend(
-      fontSize: 16,
-      fontWeight: FontWeight.w400,
-      color: Colors.black,
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
     ),
   );
 }
