@@ -12,10 +12,7 @@ class BankingOptionsScreen extends StatefulWidget {
 }
 
 class _BankingOptionsScreenState extends State<BankingOptionsScreen> {
-  List<bool> isSelected = [
-    true,
-    false
-  ]; // Toggle state for "Savings" and "Loan"
+  List<bool> isSelected = [true, false];
 
   @override
   Widget build(BuildContext context) {

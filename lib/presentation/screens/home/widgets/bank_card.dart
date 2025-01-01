@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BankingCard extends StatelessWidget {
+  const BankingCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

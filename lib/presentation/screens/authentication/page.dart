@@ -20,6 +20,13 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
   final TextEditingController _otpCont = TextEditingController();
 
   @override
+  void dispose() {
+    _numberCont.dispose();
+    _otpCont.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
 

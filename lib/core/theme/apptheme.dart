@@ -37,7 +37,7 @@ class AppTheme {
       foregroundColor: Colors.white,
       elevation: 0,
     ),
-    scaffoldBackgroundColor: ColorTheme.darkColorScheme.background,
+    scaffoldBackgroundColor: ColorTheme.darkColorScheme.surface,
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: ColorTheme.darkColorScheme.primary,

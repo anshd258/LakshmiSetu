@@ -12,6 +12,7 @@ class AddExpensePage extends StatefulWidget {
 
 class _AddExpensePageState extends State<AddExpensePage> {
   int? selectedIndex;
+  final TextEditingController _amountCont = TextEditingController();
 
   final List<Map<String, dynamic>> categories = [
     {'icon': Icons.local_grocery_store, 'label': 'Food and Groceries'},
@@ -26,6 +27,12 @@ class _AddExpensePageState extends State<AddExpensePage> {
     {'icon': Icons.money, 'label': 'Loan & Debt'},
     {'icon': Icons.phone_android, 'label': 'Technology & Communication'},
   ];
+
+  @override
+  void dispose() {
+    _amountCont.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +60,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
             SizedBox(
               width: 200,
               child: TextField(
+                controller: _amountCont,
                 decoration: InputDecoration(
                   hintText: 'Enter amount',
                   border: UnderlineInputBorder(),
