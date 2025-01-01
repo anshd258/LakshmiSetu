@@ -8,8 +8,8 @@ class AppTheme {
     colorScheme: ColorTheme.lightColorScheme,
     textTheme: TextThemeLaxmiSetu.textTheme,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF0077FF),
-      foregroundColor: Colors.white,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
       elevation: 0,
     ),
     scaffoldBackgroundColor: ColorTheme.lightColorScheme.surface,
@@ -37,7 +37,7 @@ class AppTheme {
       foregroundColor: Colors.white,
       elevation: 0,
     ),
-    scaffoldBackgroundColor: ColorTheme.darkColorScheme.background,
+    scaffoldBackgroundColor: ColorTheme.darkColorScheme.surface,
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: ColorTheme.darkColorScheme.primary,

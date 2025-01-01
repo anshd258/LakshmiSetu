@@ -41,7 +41,6 @@ class TalkerRiverpodObserver extends ProviderObserver {
     talker.log('Provider "${provider.name ?? provider.runtimeType}" disposed.');
   }
 
-  @override
   void onProviderError(
     ProviderBase provider,
     Object error,

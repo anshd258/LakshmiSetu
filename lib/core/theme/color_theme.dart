@@ -6,7 +6,7 @@ class ColorTheme {
     onPrimary: Colors.white,
     secondary: const Color(0xFFE9BBB5),
     onSecondary: Colors.black,
-    surface: const Color(0xFFF8F8F8),
+    surface: const Color.fromARGB(255, 239, 236, 248),
     onSurface: Colors.black,
     error: const Color(0xFFF44336),
     onError: Colors.white,
