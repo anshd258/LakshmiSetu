@@ -8,8 +8,8 @@ class AppTheme {
     colorScheme: ColorTheme.lightColorScheme,
     textTheme: TextThemeLaxmiSetu.textTheme,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF0077FF),
-      foregroundColor: Colors.white,
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
       elevation: 0,
     ),
     scaffoldBackgroundColor: ColorTheme.lightColorScheme.surface,

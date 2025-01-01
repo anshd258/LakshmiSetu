@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lakshmi_setu/core/theme/theme_extensions.dart';
 import 'package:lakshmi_setu/presentation/screens/authentication/widgets/otp_widget.dart';
+import 'package:lakshmi_setu/presentation/screens/budgeting/page_budgeting.dart';
 import 'package:lakshmi_setu/presentation/screens/widgets/custom_fields.dart';
 
 class AuthenticationScreen extends StatefulWidget {
@@ -101,7 +103,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      isNumberVisible = false;
+                      if (isNumberVisible) {
+                        isNumberVisible = false;
+                      } else {
+                        context.go(BudgetingScreen.route);
+                      }
                     });
                   },
                   child: Text('Continue'),
