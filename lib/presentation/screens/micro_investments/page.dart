@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lakshmi_setu/core/theme/theme_extensions.dart';
-import 'package:lakshmi_setu/presentation/screens/authentication/page.dart';
 import 'package:lakshmi_setu/presentation/screens/micro_investments/page_calculator.dart';
 
 class MicroInvestmentsScreen extends StatelessWidget {
