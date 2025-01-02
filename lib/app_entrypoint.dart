@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lakshmi_setu/app_routes.dart';
+import 'package:lakshmi_setu/core/bloc/auth/cubit.dart';
 import 'package:lakshmi_setu/core/theme/apptheme.dart';
-import 'package:lakshmi_setu/presentation/provider/bloc/auth_provider_bloc.dart';
+import 'package:lakshmi_setu/data/apis/auth_repository.dart';
 
 ValueKey<int> providerScopeKey = ValueKey<int>(0);
 
@@ -14,8 +15,8 @@ class AppEntrypoint extends StatelessWidget {
   Widget build(context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthProviderBloc>(
-          create: (context) => AuthProviderBloc(),
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(AuthRepository()),
         ),
       ],
       key: providerScopeKey,
