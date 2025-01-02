@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lakshmi_setu/core/routes/home_routes.dart';
 import 'package:lakshmi_setu/core/routes/onboarding_routes.dart';
-import 'package:lakshmi_setu/presentation/screens/micro_investments/page.dart';
-import 'package:lakshmi_setu/presentation/screens/micro_investments/page_calculator.dart';
+import 'package:lakshmi_setu/presentation/screens/authentication/page.dart';
 
 final rootNavigatoinKey = GlobalKey<NavigatorState>(debugLabel: "root");
 void resetShellRouter(BuildContext context) {
@@ -25,7 +24,7 @@ void resetShellRouter(BuildContext context) {
 
 GoRouter routes = GoRouter(
   navigatorKey: rootNavigatoinKey,
-  initialLocation: MicroInvestmentsScreen.route,
+  initialLocation: AuthenticationScreen.route,
   routes: [
     ...onboardingRoutes,
     ...homeRoutes,
