@@ -1,5 +1,5 @@
 import 'package:groq/groq.dart';
-import 'package:lakshmi_setu/data/models/temp_user.dart';
+import 'package:lakshmi_setu/data/models/user_model.dart.dart';
 
 class GroqApiService {
   GroqApiService._privateConstructor();
@@ -11,8 +11,8 @@ class GroqApiService {
   }
 
   final Groq _groq = Groq(
-    apiKey: "YOUR_API_KEY_HERE",
-    model: "gemma-7b-it",
+    apiKey: "",
+    model: "llama3-8b-8192",
   );
 
   Future<void> startChat() async {
@@ -50,7 +50,7 @@ class GroqApiService {
   }
 
   // Banking options recommendations
-  Future<String> recommendBankingOptions(TempUser user) async {
+  Future<String> recommendBankingOptions(UserModel user) async {
     try {
       String prompt =
           "Based on this user's profile, recommend banking options: $user";
@@ -63,7 +63,7 @@ class GroqApiService {
   }
 
   // Personalized micro-investment options
-  Future<String> recommendMicroInvestments(TempUser user) async {
+  Future<String> recommendMicroInvestments(UserModel user) async {
     try {
       String prompt =
           "Based on this user, recommend personalized micro-investment options: $user";
@@ -76,7 +76,7 @@ class GroqApiService {
   }
 
   // Budgeting strategies
-  Future<String> recommendBudgetingStrategies(TempUser user) async {
+  Future<String> recommendBudgetingStrategies(UserModel user) async {
     try {
       String prompt =
           "Based on this user, recommend budget management strategies: $user";
