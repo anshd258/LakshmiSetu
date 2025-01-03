@@ -1,12 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lakshmi_setu/core/bloc/micro-investments.dart/cubit.dart';
+import 'package:lakshmi_setu/core/bloc/micro-investments.dart/states.dart';
 import 'package:lakshmi_setu/core/theme/theme_extensions.dart';
+import 'package:lakshmi_setu/data/apis/groq_service.dart';
+import 'package:lakshmi_setu/data/models/user_model.dart.dart';
 import 'package:lakshmi_setu/presentation/screens/micro_investments/page_calculator.dart';
 
-class MicroInvestmentsScreen extends StatelessWidget {
+class MicroInvestmentsScreen extends StatefulWidget {
   static const route = '/microInvestmentsScreen';
   static const routeName = 'MicroInvestmentsScreen';
   const MicroInvestmentsScreen({super.key});
+
+  @override
+  State<MicroInvestmentsScreen> createState() => _MicroInvestmentsScreenState();
+}
+
+class _MicroInvestmentsScreenState extends State<MicroInvestmentsScreen> {
+  UserModel user = UserModel(
+    name: "Lorem Ipsum",
+    mobileNumber: "9XXXXXXXXXX",
+    dateOfBirth: "29th Feb 2003",
+    gender: "Female",
+    location: "New Delhi",
+    language: "English",
+    maritalStatus: "Unmarried",
+    children: 0,
+    job: "Farmer",
+    monthlySalaryRange: 20000,
+    monthlyExpensesRange: 10000,
+    monthlySavingsRange: 10000,
+    totalSavingsRange: 300000,
+    monthlySavingGoal: 5000,
+    totalSavingGoal: 400000,
+    longTermGoals: "Buy land",
+    shortTermGoals: "Education fee",
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<MicroInvestmentsCubit>().loadRecommendations(user);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,40 +54,45 @@ class MicroInvestmentsScreen extends StatelessWidget {
           style: context.textTheme.headlineSmall,
         ),
       ),
-      body: Stack(
-        children: [
-          ListView(
-            children: const [
-              InvestmentOption(
-                title: 'Recurring Deposits (RDs)',
-                subtitle:
-                    'Minimum ₹500/month | 3-5% p.a.| Lock-in: 6months-10yrs',
-              ),
-              InvestmentOption(
-                title: 'Systematic Investment Plans (SIPs)',
-                subtitle: 'Expected returns: Flexibility, duration',
-              ),
-              InvestmentOption(
-                title: 'Government Schemes',
-                subtitle:
-                    'PPF(8%), NSC(7%), Kisan VP(7%), Sukanya Samriddhi Yojana (SSY)',
-              ),
-            ],
-          ),
-          Positioned(
-            right: 16,
-            bottom: 16,
-            child: ElevatedButton(
-              onPressed: () {
-                context.push(CalculatorScreen.route);
-              },
-              child: Text(
-                'Calculator',
-                style: context.textTheme.labelSmall,
-              ),
-            ),
-          ),
-        ],
+      body: BlocProvider(
+        create: (context) =>
+            MicroInvestmentsCubit(context.read<GroqApiService>())
+              ..loadRecommendations(user),
+        child: BlocBuilder<MicroInvestmentsCubit, MicroInvestmentsState>(
+            builder: (context, state) {
+          if (state.isLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state.error.isNotEmpty) {
+            return Center(child: Text('Error: ${state.error}'));
+          } else if (state.investmentRecommendations.isNotEmpty) {
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: state.investmentRecommendations
+                        .map((rec) => InvestmentOption(
+                              title: rec,
+                              subtitle: 'Details about this investment',
+                            ))
+                        .toList(),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(CalculatorScreen.route);
+                  },
+                  child: Text(
+                    'Calculator',
+                    style: context.textTheme.labelSmall,
+                  ),
+                ),
+                const SizedBox(height: 20),
+              ],
+            );
+          } else {
+            return Center(child: Text('No recommendations available.'));
+          }
+        }),
       ),
     );
   }
