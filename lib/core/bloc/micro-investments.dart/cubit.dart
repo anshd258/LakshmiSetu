@@ -14,9 +14,16 @@ class MicroInvestmentsCubit extends Cubit<MicroInvestmentsState> {
       await groqApiService.startChat();
       final recommendations =
           await groqApiService.recommendMicroInvestments(user);
+
+      final cleanedRecommendations = recommendations
+          .split('\n')
+          .where((line) => line.trim().isNotEmpty)
+          .map((line) => line.replaceAll('*', '').replaceAll('#', '').trim())
+          .toList();
+
       emit(state.copyWith(
         isLoading: false,
-        investmentRecommendations: recommendations.split('\n'),
+        investmentRecommendations: cleanedRecommendations,
         error: '',
       ));
     } catch (e) {
