@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lakshmi_setu/core/bloc/bank-comparison/cubit.dart';
+import 'package:lakshmi_setu/core/bloc/bank-comparison/states.dart';
 import 'package:lakshmi_setu/core/theme/theme_extensions.dart';
-import 'package:lakshmi_setu/presentation/screens/banking/widgets/bar_chart.dart';
+import 'package:lakshmi_setu/data/models/user_model.dart.dart';
+import 'package:lakshmi_setu/presentation/screens/banking/widgets/comparison_chart.dart';
 
 class BankingOptionsScreen extends StatefulWidget {
   static const route = '/bankingOptionsScreen';
@@ -14,6 +18,32 @@ class BankingOptionsScreen extends StatefulWidget {
 class _BankingOptionsScreenState extends State<BankingOptionsScreen> {
   List<bool> isSelected = [true, false];
 
+  UserModel user = UserModel(
+    name: "Lorem Ipsum",
+    mobileNumber: "9XXXXXXXXXX",
+    dateOfBirth: "29th Feb 2003",
+    gender: "Female",
+    location: "New Delhi",
+    language: "English",
+    maritalStatus: "Unmarried",
+    children: 0,
+    job: "Farmer",
+    monthlySalaryRange: 20000,
+    monthlyExpensesRange: 10000,
+    monthlySavingsRange: 10000,
+    totalSavingsRange: 300000,
+    monthlySavingGoal: 5000,
+    totalSavingGoal: 400000,
+    longTermGoals: "Buy land",
+    shortTermGoals: "Education fee",
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<BankComparisonCubit>().loadBankComparisons(user);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,87 +55,98 @@ class _BankingOptionsScreenState extends State<BankingOptionsScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ToggleButtons(
-                isSelected: isSelected,
-                onPressed: (index) {
-                  setState(() {
-                    for (int i = 0; i < isSelected.length; i++) {
-                      isSelected[i] = i == index;
-                    }
-                  });
-                },
-                borderRadius: BorderRadius.circular(8),
-                selectedColor: Colors.white,
-                fillColor: context.colorScheme.primary,
-                color: context.colorScheme.onSurface,
-                textStyle: context.textTheme.labelSmall,
-                constraints: const BoxConstraints(
-                  minHeight: 36,
-                  minWidth: 80,
-                ),
-                children: const [
-                  Text('Savings'),
-                  Text('Loan'),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Text(
-                'Suggested Banks',
-                style: context.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(3, (index) {
-                  return Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.account_balance, size: 40),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Bank Name',
-                            style: context.textTheme.bodySmall,
-                          ),
-                        ],
+          child: BlocBuilder<BankComparisonCubit, BankComparisonState>(
+            builder: (context, state) {
+              if (state.isLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+
+              if (state.error.isNotEmpty) {
+                return Center(child: Text(state.error));
+              }
+
+              if (state.bankComparisons.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'No bank recommendations available',
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          context
+                              .read<BankComparisonCubit>()
+                              .loadBankComparisons(user);
+                        },
+                        child: const Text('Try Again'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              return SingleChildScrollView(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Overall Comparison",
+                      style: context.textTheme.bodyLarge!
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
-                  );
-                }),
-              ),
-              const SizedBox(height: 25),
-              Text(
-                'Interest Rates',
-                style: context.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.w600),
-              ),
-              BarChartWidget(),
-              const SizedBox(height: 30),
-              Text(
-                'Minimum Balance Requirement',
-                style: context.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.w600),
-              ),
-              BarChartWidget(),
-              const SizedBox(height: 30),
-              Text(
-                'Account Maintenance Charges',
-                style: context.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.w600),
-              ),
-              BarChartWidget(),
-            ],
+                    SizedBox(height: 10),
+                    BankComparisonChart(banks: state.bankComparisons),
+                    SizedBox(height: 40),
+                    ...state.bankComparisons.map((bank) => SizedBox(
+                          width: double.infinity,
+                          child: Card(
+                            margin: EdgeInsets.only(bottom: 16),
+                            child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    bank.bankName,
+                                    style: context.textTheme.bodyLarge!
+                                        .copyWith(fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    'Interest Rate: ${(bank.interestRate).toStringAsFixed(2)}%',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  Text(
+                                    'Minimum Balance: ₹${bank.minimumBalance}',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  Text(
+                                    'Monthly Fee: ₹${bank.monthlyFee}',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    'Key Features:',
+                                    style: context.textTheme.bodyLarge!
+                                        .copyWith(fontWeight: FontWeight.w600),
+                                  ),
+                                  ...bank.features.map((f) => Text(
+                                        '• $f',
+                                        style: context.textTheme.bodyMedium,
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),
