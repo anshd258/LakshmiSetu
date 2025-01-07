@@ -13,7 +13,7 @@ class GroqApiService {
   }
 
   final Groq _groq = Groq(
-    apiKey: "",
+    apiKey: "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",
     model: "llama3-8b-8192",
   );
 
