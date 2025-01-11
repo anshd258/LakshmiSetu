@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lakshmi_setu/core/theme/theme_extensions.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -23,8 +24,8 @@ class ChatbotDialogState extends State<ChatbotDialog> {
 
     try {
       final response = await http.post(
-        Uri.parse(''),
-        body: {"message": message},
+        Uri.parse('${dotenv.env['ChatBot_Url']}$message'),
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       );
 
       if (response.statusCode == 200) {
@@ -90,7 +91,7 @@ class ChatbotDialogState extends State<ChatbotDialog> {
                 },
               ),
             ),
-            if (_isLoading) CircularProgressIndicator(),
+            if (_isLoading) Center(),
             Row(
               children: [
                 Expanded(

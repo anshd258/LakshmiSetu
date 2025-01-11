@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:groq/groq.dart';
 import 'package:lakshmi_setu/data/models/user_model.dart.dart';
 
@@ -13,7 +14,7 @@ class GroqApiService {
   }
 
   final Groq _groq = Groq(
-    apiKey: "",
+    apiKey: dotenv.env['GROQ_API_KEY'] ?? '',
     model: "llama3-8b-8192",
   );
 
