@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lakshmi_setu/presentation/screens/learn/page.dart';
 import 'package:lakshmi_setu/presentation/screens/banking/page.dart';
 import 'package:lakshmi_setu/presentation/screens/budgeting/page_budgeting.dart';
+import 'package:lakshmi_setu/presentation/screens/home/widgets/chatbot_dialog.dart';
 import 'package:lakshmi_setu/presentation/screens/home/widgets/home_card.dart';
 import 'package:lakshmi_setu/presentation/screens/micro_investments/page.dart';
 import 'package:lakshmi_setu/presentation/screens/profile/page.dart';
@@ -29,7 +31,9 @@ class HomePage extends StatelessWidget {
               title: "Learn",
               subtitle: "Explore recommended courses",
               color: Color(0xFFF8C882),
-              onTap: () {},
+              onTap: () {
+                context.push(LearnScreen.route);
+              },
             ),
             HomeCard(
               path: 'assets/home/budgeting.png',
@@ -79,7 +83,14 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.large(
         backgroundColor: Color(0xFF8DA47E),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return ChatbotDialog();
+            },
+          );
+        },
         child: Icon(
           Icons.support_agent,
           color: Colors.white,

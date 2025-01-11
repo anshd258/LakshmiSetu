@@ -11,7 +11,7 @@ class ColorTheme {
     error: const Color(0xFFF44336),
     onError: Colors.white,
     brightness: Brightness.light,
-    tertiary: const Color(0xFFAAD9CD),
+    tertiary: const Color(0xFFE5BE21),
     onTertiary: Colors.black,
   );
 

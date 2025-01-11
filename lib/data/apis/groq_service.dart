@@ -26,6 +26,15 @@ class GroqApiService {
     }
   }
 
+  String _cleanContent(String content) {
+    content = content.replaceAllMapped(
+      RegExp(r'\*\*([^*]+)\*\*:'),
+      (match) => '${match.group(1)}:',
+    );
+    content = content.replaceAll('**', '');
+    return content;
+  }
+
   // Language Translation
   Future<String> translate(String text, String targetLanguage) async {
     try {
@@ -42,9 +51,10 @@ class GroqApiService {
   Future<String> generateStory(String prompt, String language) async {
     try {
       String fullPrompt =
-          "Generate a story in $language for this prompt: $prompt";
+          "Create an engaging, culturally relevant short story-based learning content on the topic $prompt in $language language. The story should be intuitive and relatable, helping people in India understand and apply the concept effectively in their daily lives.";
       GroqResponse response = await _groq.sendMessage(fullPrompt);
-      return response.choices.first.message.content;
+      String content = response.choices.first.message.content;
+      return _cleanContent(content);
     } catch (error) {
       print("Error generating story: $error");
       return "Story generation error";
@@ -60,7 +70,7 @@ class GroqApiService {
     START YOUR RESPONSE WITH [ AND END WITH ].
 
     Based on this user profile: $user
-    Generate a comparison of exactly 3 recommended banks in this format:
+    Generate a comparison of exactly 3 recommended banks in india in this format:
     [
       {
         "bankName": "Bank 1",

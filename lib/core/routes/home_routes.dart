@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:lakshmi_setu/presentation/screens/learn/content_page.dart';
+import 'package:lakshmi_setu/presentation/screens/learn/page.dart';
 import 'package:lakshmi_setu/presentation/screens/banking/page.dart';
 import 'package:lakshmi_setu/presentation/screens/budgeting/page_budgeting.dart';
 import 'package:lakshmi_setu/presentation/screens/budgeting/page_expenses.dart';
@@ -8,7 +10,21 @@ import 'package:lakshmi_setu/presentation/screens/micro_investments/page.dart';
 import 'package:lakshmi_setu/presentation/screens/micro_investments/page_calculator.dart';
 
 List<GoRoute> homeRoutes = [
-  GoRoute(path: HomePage.route, builder: (context, state) => HomePage()),
+  GoRoute(
+    path: HomePage.route,
+    builder: (context, state) => HomePage(),
+  ),
+  GoRoute(
+    path: LearnScreen.route,
+    builder: (context, state) => LearnScreen(),
+  ),
+  GoRoute(
+    path: LearningContentScreen.route,
+    builder: (context, state) {
+      final topic = state.uri.queryParameters['topic']; 
+      return LearningContentScreen(topic: topic);
+    },
+  ),
   GoRoute(
     path: ProfileScreen.route,
     builder: (context, state) => ProfileScreen(),
