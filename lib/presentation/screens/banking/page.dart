@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lakshmi_setu/core/bloc/bank-comparison/cubit.dart';
 import 'package:lakshmi_setu/core/bloc/bank-comparison/states.dart';
 import 'package:lakshmi_setu/core/theme/theme_extensions.dart';
-import 'package:lakshmi_setu/data/models/user_model.dart.dart';
 import 'package:lakshmi_setu/presentation/screens/banking/widgets/comparison_chart.dart';
+import 'package:lakshmi_setu/user.dart';
 
 class BankingOptionsScreen extends StatefulWidget {
   static const route = '/bankingOptionsScreen';
@@ -17,26 +17,6 @@ class BankingOptionsScreen extends StatefulWidget {
 
 class _BankingOptionsScreenState extends State<BankingOptionsScreen> {
   List<bool> isSelected = [true, false];
-
-  UserModel user = UserModel(
-    name: "Lorem Ipsum",
-    mobileNumber: "9XXXXXXXXXX",
-    dateOfBirth: "29th Feb 2003",
-    gender: "Female",
-    location: "New Delhi",
-    language: "English",
-    maritalStatus: "Unmarried",
-    children: 0,
-    job: "Farmer",
-    monthlySalaryRange: 20000,
-    monthlyExpensesRange: 10000,
-    monthlySavingsRange: 10000,
-    totalSavingsRange: 300000,
-    monthlySavingGoal: 5000,
-    totalSavingGoal: 400000,
-    longTermGoals: "Buy land",
-    shortTermGoals: "Education fee",
-  );
 
   @override
   void initState() {
@@ -101,48 +81,62 @@ class _BankingOptionsScreenState extends State<BankingOptionsScreen> {
                     SizedBox(height: 10),
                     BankComparisonChart(banks: state.bankComparisons),
                     SizedBox(height: 40),
-                    ...state.bankComparisons.map((bank) => SizedBox(
-                          width: double.infinity,
-                          child: Card(
-                            margin: EdgeInsets.only(bottom: 16),
-                            child: Padding(
-                              padding: EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    bank.bankName,
-                                    style: context.textTheme.bodyLarge!
-                                        .copyWith(fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Interest Rate: ${(bank.interestRate).toStringAsFixed(2)}%',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                  Text(
-                                    'Minimum Balance: ₹${bank.minimumBalance}',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                  Text(
-                                    'Monthly Fee: ₹${bank.monthlyFee}',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Key Features:',
-                                    style: context.textTheme.bodyLarge!
-                                        .copyWith(fontWeight: FontWeight.w600),
-                                  ),
-                                  ...bank.features.map((f) => Text(
-                                        '• $f',
-                                        style: context.textTheme.bodyMedium,
-                                      )),
-                                ],
-                              ),
+                    ...state.bankComparisons.asMap().entries.map((entry) {
+                      final index = entry.key;
+                      final bank = entry.value;
+                      final colors = [
+                        Color.fromARGB(180, 170, 217, 205),
+                        Color.fromARGB(192, 248, 201, 130),
+                        Color.fromARGB(187, 233, 187, 181),
+                      ];
+                      final color = colors[index % colors.length];
+                      return SizedBox(
+                        width: double.infinity,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          margin: EdgeInsets.only(bottom: 16),
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  bank.bankName,
+                                  style: context.textTheme.bodyLarge!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Interest Rate: ${(bank.interestRate).toStringAsFixed(2)}%',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                                Text(
+                                  'Minimum Balance: ₹${bank.minimumBalance}',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                                Text(
+                                  'Monthly Fee: ₹${bank.monthlyFee}',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Key Features:',
+                                  style: context.textTheme.bodyLarge!
+                                      .copyWith(fontWeight: FontWeight.w600),
+                                ),
+                                ...bank.features.map((f) => Text(
+                                      '• $f',
+                                      style: context.textTheme.bodyMedium,
+                                    )),
+                              ],
                             ),
                           ),
-                        )),
+                        ),
+                      );
+                    }),
                   ],
                 ),
               );

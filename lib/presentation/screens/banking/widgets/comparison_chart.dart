@@ -49,7 +49,7 @@ class BankComparisonChart extends StatelessWidget {
                       barRods: [
                         BarChartRodData(
                           toY: entry.value.overallScore,
-                          color: Colors.blue,
+                          color: context.colorScheme.primary,
                           width: 20,
                         ),
                       ],

@@ -48,7 +48,8 @@ class _BudgetingScreenState extends State<BudgetingScreen> {
                     child: LinearProgressIndicator(
                       value: 3000 / 5000,
                       backgroundColor: Colors.grey[300],
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          context.colorScheme.primary),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       minHeight: 8,
                     ),
@@ -94,7 +95,7 @@ class _BudgetingScreenState extends State<BudgetingScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.add_circle,
-                      color: Colors.blue,
+                      color: context.colorScheme.primary,
                       size: 30,
                     ),
                     onPressed: () {
@@ -117,10 +118,10 @@ class _BudgetingScreenState extends State<BudgetingScreen> {
                       chartLegendSpacing: 32,
                       chartRadius: MediaQuery.of(context).size.width / 2.2,
                       colorList: [
-                        Colors.blue,
-                        Colors.green,
-                        Colors.orange,
-                        Colors.purple,
+                        Color(0xFF8DA47E),
+                        Color(0xFFAAD9CD),
+                        Color(0xFFF8C882),
+                        Color(0xFFE9BBB5),
                       ],
                       legendOptions: LegendOptions(
                         showLegends: true,
@@ -159,10 +160,10 @@ class _BudgetingScreenState extends State<BudgetingScreen> {
                       chartLegendSpacing: 32,
                       chartRadius: MediaQuery.of(context).size.width / 2.2,
                       colorList: [
-                        Colors.blue,
-                        Colors.green,
-                        Colors.orange,
-                        Colors.purple,
+                        Color(0xFF8DA47E),
+                        Color(0xFFAAD9CD),
+                        Color(0xFFF8C882),
+                        Color(0xFFE9BBB5),
                       ],
                       legendOptions: LegendOptions(
                         showLegends: true,

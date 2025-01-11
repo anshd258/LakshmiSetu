@@ -11,6 +11,8 @@ class ColorTheme {
     error: const Color(0xFFF44336),
     onError: Colors.white,
     brightness: Brightness.light,
+    tertiary: const Color(0xFFE5BE21),
+    onTertiary: Colors.black,
   );
 
   static final darkColorScheme = ColorScheme(
@@ -20,7 +22,7 @@ class ColorTheme {
     onSecondary: Colors.white,
     surface: const Color(0xFF1E1E1E),
     onSurface: Colors.white,
-    error: const Color(0xFFCF6679),
+    error: const Color(0xFFF44336),
     onError: Colors.black,
     brightness: Brightness.dark,
   );
