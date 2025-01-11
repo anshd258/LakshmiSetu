@@ -2,12 +2,17 @@ import 'package:go_router/go_router.dart';
 import 'package:lakshmi_setu/presentation/screens/banking/page.dart';
 import 'package:lakshmi_setu/presentation/screens/budgeting/page_budgeting.dart';
 import 'package:lakshmi_setu/presentation/screens/budgeting/page_expenses.dart';
+import 'package:lakshmi_setu/presentation/screens/profile/page.dart';
 import 'package:lakshmi_setu/presentation/screens/home/page.dart';
 import 'package:lakshmi_setu/presentation/screens/micro_investments/page.dart';
 import 'package:lakshmi_setu/presentation/screens/micro_investments/page_calculator.dart';
 
 List<GoRoute> homeRoutes = [
   GoRoute(path: HomePage.route, builder: (context, state) => HomePage()),
+  GoRoute(
+    path: ProfileScreen.route,
+    builder: (context, state) => ProfileScreen(),
+  ),
   GoRoute(
     path: BudgetingScreen.route,
     builder: (context, state) => BudgetingScreen(),

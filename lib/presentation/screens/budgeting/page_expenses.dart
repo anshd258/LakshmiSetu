@@ -89,17 +89,21 @@ class _AddExpensePageState extends State<AddExpensePage> {
                       decoration: BoxDecoration(
                         border: Border(
                           left: BorderSide(
-                            color: isSelected ? Colors.blue : Colors.grey,
+                            color: isSelected
+                                ? context.colorScheme.primary
+                                : Colors.grey,
                             width: 1,
                           ),
                           bottom: BorderSide(
-                            color: isSelected ? Colors.blue : Colors.grey,
+                            color: isSelected
+                                ? context.colorScheme.primary
+                                : Colors.grey,
                             width: 1,
                           ),
                         ),
                         borderRadius: BorderRadius.circular(12),
                         color: isSelected
-                            ? Colors.blue.withOpacity(0.1)
+                            ? context.colorScheme.primary.withOpacity(0.1)
                             : Colors.transparent,
                       ),
                       child: Column(
@@ -108,7 +112,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
                           Icon(
                             categories[index]['icon'],
                             size: 30,
-                            color: isSelected ? Colors.blue : Colors.black,
+                            color: isSelected
+                                ? context.colorScheme.primary
+                                : Colors.black,
                           ),
                           const SizedBox(height: 8),
                           Text(
@@ -116,7 +122,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
                             textAlign: TextAlign.center,
                             style: context.textTheme.bodySmall!.copyWith(
                               fontSize: 12,
-                              color: isSelected ? Colors.blue : Colors.black,
+                              color: isSelected
+                                  ? context.colorScheme.primary
+                                  : Colors.black,
                             ),
                           ),
                         ],
