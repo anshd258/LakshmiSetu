@@ -67,6 +67,7 @@ dependencies:
   fl_chart: ^0.70.0
   http: ^1.2.2
   flutter_dotenv: ^5.2.1
+  simple_gradient_text: ^1.0.3
 
 dev_dependencies:
   flutter_test:

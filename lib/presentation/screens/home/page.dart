@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lakshmi_setu/presentation/screens/community/community_page.dart';
 import 'package:lakshmi_setu/presentation/screens/learn/page.dart';
 import 'package:lakshmi_setu/presentation/screens/banking/page.dart';
 import 'package:lakshmi_setu/presentation/screens/budgeting/page_budgeting.dart';
@@ -67,7 +68,9 @@ class HomePage extends StatelessWidget {
               title: "Community",
               subtitle: "Build Connections, Share Knowledge, and Grow Together",
               color: Color(0xFFF8C882),
-              onTap: () {},
+              onTap: () {
+                context.push(AnimatedDiscordPage.route);
+              },
             ),
             HomeCard(
               path: 'assets/home/profile.png',

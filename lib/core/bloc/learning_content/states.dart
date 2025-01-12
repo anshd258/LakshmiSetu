@@ -1,18 +1,20 @@
+import 'package:lakshmi_setu/data/models/story_model.dart';
+
 class LearningContentState {
   final bool isLoading;
   final String error;
-  final String content;
+  final ReferenceData? content;
 
   LearningContentState({
     this.isLoading = false,
     this.error = '',
-    this.content = '',
+    this.content ,
   });
 
   LearningContentState copyWith({
     bool? isLoading,
     String? error,
-    String? content,
+    ReferenceData? content,
   }) {
     return LearningContentState(
       isLoading: isLoading ?? this.isLoading,

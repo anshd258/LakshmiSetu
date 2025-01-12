@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lakshmi_setu/app_routes.dart';
 import 'package:lakshmi_setu/core/bloc/auth/cubit.dart';
 import 'package:lakshmi_setu/core/bloc/bank-comparison/cubit.dart';
+import 'package:lakshmi_setu/core/bloc/cubit/banking_suggestions_cubit.dart';
 import 'package:lakshmi_setu/core/bloc/learning_content/cubit.dart';
 import 'package:lakshmi_setu/core/bloc/micro-investments.dart/cubit.dart';
 import 'package:lakshmi_setu/core/theme/apptheme.dart';
@@ -29,6 +30,9 @@ class AppEntrypoint extends StatelessWidget {
         ),
         BlocProvider<MicroInvestmentsCubit>(
           create: (context) => MicroInvestmentsCubit(GroqApiService()),
+        ),
+        BlocProvider<BankingSuggestionsCubit>(
+          create: (context) => BankingSuggestionsCubit(GroqApiService()),
         ),
         BlocProvider<BankComparisonCubit>(
           create: (context) => BankComparisonCubit(GroqApiService()),

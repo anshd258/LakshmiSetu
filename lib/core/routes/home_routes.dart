@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:lakshmi_setu/presentation/screens/community/community_page.dart';
 import 'package:lakshmi_setu/presentation/screens/learn/content_page.dart';
 import 'package:lakshmi_setu/presentation/screens/learn/page.dart';
 import 'package:lakshmi_setu/presentation/screens/banking/page.dart';
@@ -21,7 +22,7 @@ List<GoRoute> homeRoutes = [
   GoRoute(
     path: LearningContentScreen.route,
     builder: (context, state) {
-      final topic = state.uri.queryParameters['topic']; 
+      final topic = state.uri.queryParameters['topic'];
       return LearningContentScreen(topic: topic);
     },
   ),
@@ -48,5 +49,9 @@ List<GoRoute> homeRoutes = [
   GoRoute(
     path: MicroInvestmentsScreen.route,
     builder: (context, state) => MicroInvestmentsScreen(),
+  ),
+  GoRoute(
+    path: AnimatedDiscordPage.route,
+    builder: (context, state) => AnimatedDiscordPage(),
   ),
 ];
